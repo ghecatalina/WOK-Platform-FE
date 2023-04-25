@@ -1,34 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { getCategories, getDailyMenu } from '../api';
+import React, { useEffect } from 'react';
 import Layout from '../components/Layout/Layout';
+import CategoriesGrid from './CategoriesGrid';
+import { useDispatch, useSelector } from 'react-redux';
+import DailyMenu from './DailyMenu';
+import { getCategoriesAndDaily } from '../actions/multipleActions';
+import {Divider, Grid } from '@mui/material';
 
 const Menu = () => {
-  const [categories, setCategories] = useState(null);
-  const [dailyMenu, setDailyMenu] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getCategories()
-    .then((response) => {
-        console.log(response.data);
-    })
-    .catch(function (error) {
-        console.log(error);
-    });
-  }, []);
-
-  useEffect(() => {
-    getDailyMenu()
-    .then((response) => {
-        console.log(response.data);
-    })
-    .catch(function (error) {
-        console.log(error);
-    });
-  }, []);
+    dispatch(getCategoriesAndDaily());
+  }, [dispatch]);
 
   return (
     <Layout>
-        <h1>Menu Page</h1>
+      <Grid container direction="row"
+      justifyContent="space-between"
+      alignItems="flex-start">
+        <Grid item xs={12}>
+          <DailyMenu />
+        </Grid>
+        <Grid item xs={12}>
+          <Divider />
+        </Grid>
+        <Grid item xs={12}>
+          <CategoriesGrid />
+        </Grid>
+      </Grid>
     </Layout>
   )
 }
