@@ -1,0 +1,13 @@
+export const CREATE = 'CREATE';
+export const UPDATE = 'UPDATE';
+export const DELETE = 'DELETE';
+export const GET_ALL = 'GET_ALL';
+export const GET_ITEMS = 'GET_ITEMS';
+export const GET_DAILY = 'GET_DAILY';
+export const GET_ITEM = 'GET_ITEM';
+export const UPDATE_ITEM = 'UPDATE_ITEM';
+export const UPDATE_DAILY = 'UPDATE_DAILY';
+export const GET_RESERVATIONS = 'GET_RESERVATIONS';
+export const DELETE_RESERVATIONS = 'DELETE_RESERVATIONS';
+export const UPDATE_RESERVATION = 'UPDATE_RESERVATION';
+export const GET_CONTACTS = 'GET_CONTACTS';

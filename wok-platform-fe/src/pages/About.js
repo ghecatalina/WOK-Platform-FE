@@ -6,7 +6,6 @@ const About = () => {
   return (
     <Layout>
         <Box sx={{
-          my: 10,
           textAlign: 'center',
           p: 2,
           "& h4":{
@@ -18,7 +17,9 @@ const About = () => {
             textAlign: 'justify'
           }
         }}>
-          <Typography variant='h4'>
+          <Typography variant='h4' sx={{
+            paddingBottom: '2vh'
+          }}>
             Welcome to WOK Restaurant
           </Typography>
           <p>
