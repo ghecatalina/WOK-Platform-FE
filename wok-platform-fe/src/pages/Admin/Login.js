@@ -37,7 +37,9 @@ const Login = () => {
             localStorage.setItem('tk', response?.data.tk);
             localStorage.setItem('id', response?.data.id);
             localStorage.setItem('role', response?.data.role);
-            navigate('/admin/categories');
+            response.data.role === 'Admin'
+            ? navigate('/admin/categories')
+            : navigate('/worker/messages')
         })
         .catch(error => {
             console.log(error.response.data.Message);

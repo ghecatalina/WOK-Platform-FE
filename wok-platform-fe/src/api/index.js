@@ -1,3 +1,4 @@
+import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 import axios from "axios";
 
 export const api = axios.create({ baseURL: 'https://localhost:7104/' });
@@ -8,6 +9,12 @@ export const apiWithToken = axios.create({
     timeout: 1000,
     headers: {'Authorization': 'Bearer ' + token}
   });
+
+//signalR
+export const signalrConnection = new HubConnectionBuilder()
+  .withUrl("https://localhost:7104/messages")
+  .configureLogging(LogLevel.Information)
+  .build();
 
 //categories
 export const getCategories = () => api.get('categories');
@@ -38,3 +45,6 @@ export const updateReservation = (id, formData) => apiWithToken.put(`reservation
 //contacts
 export const createContact = (formData) => api.post('/contacts', formData);
 export const getContacts = (formData) => apiWithToken.get('/contacts', {params: formData});
+
+//messages
+export const getMessages = () => apiWithToken.get('/client-messages');

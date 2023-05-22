@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../style/HeaderStyle.css';
 import MenuIcon from '@mui/icons-material/Menu';
 
-const AdminHeader = () => {
+const WorkerHeader = () => {
     const [mobileOpen, setMobileOpen] = useState(false);
     //handle menu click
     const handleDrawerToggle = () => {
@@ -32,19 +32,7 @@ const AdminHeader = () => {
             <Divider />
             <ul className='mobile-menu'>
                 <li>
-                    <Link to={'/admin/categories'}>Categories</Link>
-                </li>
-                <li>
-                    <Link to={'/admin/dailymenu'}>Daily Menu</Link>
-                </li>
-                <li>
-                    <Link to={'/admin/reservations'}>Reservations</Link>
-                </li>
-                <li>
-                    <Link to={'/admin/contacts'}>Contacts</Link>
-                </li>
-                <li>
-                    <Link to={'/admin/messages'}>Messages</Link>
+                    <Link to={'/worker/messages'}>Messages</Link>
                 </li>
                 <li>
                     <Link to={'/admin/login'} onClick={handleClick}>Logout</Link>
@@ -80,19 +68,7 @@ const AdminHeader = () => {
                         <Box sx={{display: {xs:'none', sm: 'block'}}}>
                         <ul className='navigation-menu'>
                             <li>
-                                <Link to={'/admin/categories'}>Categories</Link>
-                            </li>
-                            <li>
-                                <Link to={'/admin/dailymenu'}>Daily Menu</Link>
-                            </li>
-                            <li>
-                                <Link to={'/admin/reservations'}>Reservations</Link>
-                            </li>
-                            <li>
-                                <Link to={'/admin/contacts'}>Contacts</Link>
-                            </li>
-                            <li>
-                                <Link to={'/admin/messages'}>Messages</Link>
+                                <Link to={'/worker/messages'}>Messages</Link>
                             </li>
                             <li>
                                 <Link to={'/admin/login'} onClick={handleClick}>Logout</Link>
@@ -117,4 +93,4 @@ const AdminHeader = () => {
   )
 }
 
-export default AdminHeader;
+export default WorkerHeader;
