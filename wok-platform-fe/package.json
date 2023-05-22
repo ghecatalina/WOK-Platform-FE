@@ -6,6 +6,7 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@hookform/resolvers": "^3.0.0",
+    "@microsoft/signalr": "^7.0.5",
     "@mui/core": "^5.0.0-alpha.54",
     "@mui/icons-material": "^5.11.11",
     "@mui/lab": "^5.0.0-alpha.127",

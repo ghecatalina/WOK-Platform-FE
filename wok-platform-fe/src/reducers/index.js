@@ -4,11 +4,13 @@ import categories from "./categories";
 import dailyMenu from "./dailyMenu";
 import reservations from "./reservations";
 import contacts from "./contacts";
+import messages from "./messages";
 
 export default combineReducers({
     items: items,
     categories: categories,
     dailyMenu: dailyMenu,
     reservations: reservations,
-    contacts: contacts
+    contacts: contacts,
+    messages: messages
 });

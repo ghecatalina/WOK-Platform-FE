@@ -12,8 +12,11 @@ import ItemEdit from './pages/Admin/ItemEdit';
 import DailyMenu from './pages/Admin/DailyMenu';
 import Reservations from './pages/Admin/Reservations';
 import Contacts from './pages/Admin/Contacts';
+import Messages from './pages/Messages';
+import MessagesFromClient from './pages/Admin/MessagesFromClient';
 
 function App() {
+
   return (
     <>
     <BrowserRouter>
@@ -30,6 +33,9 @@ function App() {
         <Route exact path='/admin/dailymenu' element={<DailyMenu />} />
         <Route exact path='/admin/reservations' element={<Reservations />} />
         <Route exact path='/admin/contacts' element={<Contacts />} />
+        {['/worker/messages', '/admin/messages']
+        .map(path => <Route path={path} element={<MessagesFromClient />} />)}
+        <Route exact path='/messages/:tableId' element={<Messages />} />
       </Routes>
     </BrowserRouter>
     </>
