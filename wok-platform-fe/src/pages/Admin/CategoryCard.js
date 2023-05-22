@@ -5,7 +5,8 @@ import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { updateCategorybyId } from '../../actions/categories';
+import { deleteCategoryById, updateCategorybyId } from '../../actions/categories';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const CategoryCard = ({category}) => {
     const [isEditable, setIsEditable] = useState(false);
@@ -23,6 +24,10 @@ const CategoryCard = ({category}) => {
 
     const goToItems = () => {
         navigate(`/admin/categories/${category.id}/items`);
+    }
+    
+    const deleteCategory = () => {
+        dispatch(deleteCategoryById(category.id));
     }
 
   return (
@@ -51,9 +56,14 @@ const CategoryCard = ({category}) => {
         <CardActions>
             {
                 !isEditable &&
+                <>
+                <IconButton onClick={deleteCategory}>
+                    <DeleteIcon sx={{color: 'whitesmoke'}} />
+                </IconButton>
                 <IconButton onClick={() => setIsEditable(!isEditable)}>
                     <EditIcon sx={{color: 'whitesmoke'}} />
                 </IconButton>
+                </>
             }
             {
                 isEditable &&

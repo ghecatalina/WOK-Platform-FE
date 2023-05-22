@@ -26,7 +26,7 @@ function App() {
         <Route exact path="/contact" element={<Contact/>} />
         <Route exact path="/menu" element={<Menu/>} />
         <Route exact path="/reservations" element={<ReserveTable/>} />
-        <Route exact path='/admin/login' element={<Login />} />
+        <Route exact path='/login' element={<Login />} />
         <Route exact path='/admin/categories' element={<Categories />} />
         <Route exact path='/admin/categories/:categoryId/items' element={<Items />} />
         <Route exact path='/admin/categories/:categoryId/items/:itemId' element={<ItemEdit />} />
