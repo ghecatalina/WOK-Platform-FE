@@ -1,7 +1,6 @@
 import { Box, Button, Card, CardContent, CardMedia, Divider, Grid, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import CategoryButton from './CategoryButton';
+import { useDispatch, useSelector } from 'react-redux';
 import { getItems } from '../actions/items';
 
 const CategoriesGrid = () => {
@@ -13,6 +12,7 @@ const CategoriesGrid = () => {
     useEffect(() =>{
         if (categories != null && categories.length > 0){
             setCategoryId(categories[0].id);
+            setFontWeight({fontWeight: 900, id: categories[0].id});
         }
     },[categories])
 
@@ -21,19 +21,28 @@ const CategoriesGrid = () => {
     }, [dispatch, categoryId])
 
     const handleCategory = (id) => {
+        setFontWeight({fontWeight: 900, id: id});
         setCategoryId(id);
     }
 
   return (
     <Grid container justifyContent='center' alignItems='center'>
-        {categories != null && categories.map((category) => {
+        {categories != null && categoryId != null && categories.map((category) => {
             return (
                 <>
                 <Box justifyContent='center' alignItems='center'>
                     <Grid item key={category.id} style={{margin: 20}}>
-                        <Button variant='text' sx={{color: 'black'}} onClick={() => handleCategory(category.id)}>
+                    <Button 
+                        variant='text' 
+                        sx={{
+                            color: categoryId === category.id ? 'black' : 'inherit',
+                        }}
+                        onClick={() => handleCategory(category.id)}
+                    >
+                        <Typography sx={{ fontWeight: categoryId === category.id ? 600 : 400 }}>
                             {category.name}
-                        </Button>
+                        </Typography>
+                    </Button>
                     </Grid>
                 </Box>
                 </>

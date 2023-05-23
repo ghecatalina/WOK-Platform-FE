@@ -8,13 +8,15 @@ import CategoriesGrid from './CategoriesGrid';
 import { useDispatch } from 'react-redux';
 import { getAllCategories } from '../../actions/categories';
 import AdminLayout from '../../components/AdminLayout';
+import CategoryPopup from './CategoryPopup';
+import AddCategoryForm from './AddCategoryForm';
 
 const schema = yup.object().shape({
     email: yup.string().required(),
   });
 
 const Categories = () => {
-    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const [openPopup, setOpenPopup] = useState(false);
     const {register, handleSubmit, formState: {errors}, reset} = useForm({resolver: yupResolver(schema)});
     const dispatch = useDispatch();
 
@@ -27,37 +29,15 @@ const Categories = () => {
         <Box sx={{margin: '20px', minHeight: '100vh', justifyContent: 'center', justifyItems: 'center'}}>
         <Button 
         variant="contained" style={{backgroundColor: "black", margin: '10px'}}
-        onClick={() => setIsDrawerOpen(!isDrawerOpen)}>Add Category</Button>
+        onClick={() => setOpenPopup(true)}>Add Category</Button>
         <Divider sx={{margin: '20px'}}/>
         <CategoriesGrid />
-        <Drawer 
-        anchor='right' 
-        open={isDrawerOpen} 
-        onClose={() => setIsDrawerOpen(!isDrawerOpen)}>
-            <Box p={2} width='400px' textAlign='center'>
-        <Typography variant='h4'>Add Category</Typography>
-        <Divider />
-        <Grid container xs={12} sx={{
-            direction: 'column',
-            marginTop: '20px',
-            alignContent: 'center',
-            justifyContent: 'center',
-            justifyItems: 'center',
-            alignItems: 'center'}}>
-            <form>
-                <Grid container spacing={3}>
-                    <Grid item xs={12}>
-                        <TextField required {...register("name", {required: "This field is required"})} label='Category Name'></TextField>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Button variant='contained' sx={{background: 'black'}} type='submit'>Save</Button>
-                    </Grid>
-                </Grid>
-            </form>
-        </Grid>
-    </Box>
-        </Drawer>
         </Box>
+        <CategoryPopup title="Add Category" openPopup={openPopup} setOpenPopup={setOpenPopup}>
+          <AddCategoryForm 
+          openPopup={openPopup}
+          setOpenPopup={setOpenPopup}/>
+        </CategoryPopup>
     </AdminLayout>
   )
 }

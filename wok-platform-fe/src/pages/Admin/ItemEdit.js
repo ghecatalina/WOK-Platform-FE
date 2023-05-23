@@ -41,7 +41,7 @@ const ItemEdit = () => {
             ingredients: formData.ingredients,
             description: formData.description,
             photo: formData.photo,
-            price: 0
+            price: formData.price
         };
         dispatch(updateItem(categoryId, formData.id, formData, navigate));
     }

@@ -29,7 +29,7 @@ export const getItem = (categoryId, itemId) => async (dispatch) => {
 export const createItem = (categoryId, item) => async (dispatch) => {
     try {
         const { data } = await addItemByCategory(categoryId, item);
-
+        
         dispatch({ type: CREATE, payload: data });
     }
     catch(err){
@@ -37,12 +37,11 @@ export const createItem = (categoryId, item) => async (dispatch) => {
     }
 }
 
-export const updateItem = (categoryId, itemId, item, navigate) => async (dispatch) => {
+export const updateItem = (categoryId, itemId, item) => async (dispatch) => {
     try {
-        const { data } = await updateItemByCategory(categoryId, itemId, item);
-    
+        await updateItemByCategory(categoryId, itemId, item);
+        const { data } = await getItemsByCategory(categoryId);
         dispatch({ type: UPDATE_ITEM, payload: data });
-        navigate(`/admin/categories/${categoryId}/items`);
     }
     catch (err) {
         console.log(err.message);
