@@ -6,17 +6,26 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { deleteItem } from '../../actions/items';
 
-const ItemCard = ({item}) => {
+const ItemCard = ({
+  item, 
+  openPopup, 
+  setOpenPopup, 
+  isEdit, 
+  setIsEdit,
+  itemForAction,
+  setItemForAction}) => {
     const { categoryId } = useParams();
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const handleDelete = () => {
         dispatch(deleteItem(categoryId, item.id));
     }
 
     const handleEdit = () => {
-      navigate(`/admin/categories/${categoryId}/items/${item.id}`);
+      //navigate(`/admin/categories/${categoryId}/items/${item.id}`);
+      setItemForAction(item);
+      setIsEdit(true);
+      setOpenPopup(true);
     }
 
   return (
@@ -42,7 +51,7 @@ const ItemCard = ({item}) => {
             {item.quantity} g
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {item.price}
+            {item.price} RON
           </Typography>
         </CardContent>
       </CardActionArea>

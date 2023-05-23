@@ -27,7 +27,7 @@ function MyComponent() {
     //map.setZoom(10);
     setTimeout(() => {
       map.setZoom(15);
-    }, 10);
+    }, 3000);
   }, [])
 
   const onUnmount = React.useCallback(function callback(map) {

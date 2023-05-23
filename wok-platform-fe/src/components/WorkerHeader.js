@@ -35,7 +35,7 @@ const WorkerHeader = () => {
                     <Link to={'/worker/messages'}>Messages</Link>
                 </li>
                 <li>
-                    <Link to={'/admin/login'} onClick={handleClick}>Logout</Link>
+                    <Link to={'/login'} onClick={handleClick}>Logout</Link>
                 </li>
             </ul>
         </Box>
