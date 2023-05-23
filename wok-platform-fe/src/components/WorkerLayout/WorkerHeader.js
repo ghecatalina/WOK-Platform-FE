@@ -1,16 +1,23 @@
 import { AppBar, Box, Divider, Drawer, IconButton, Toolbar, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import BrunchDiningIcon from '@mui/icons-material/BrunchDining';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../style/HeaderStyle.css';
 import MenuIcon from '@mui/icons-material/Menu';
 
-const Header = () => {
+const WorkerHeader = () => {
     const [mobileOpen, setMobileOpen] = useState(false);
     //handle menu click
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     }
+ 
+    const handleClick = () => {
+        localStorage.removeItem('tk');
+        localStorage.removeItem('id');
+        localStorage.removeItem('role');
+    }
+
     //menu drawer
     const drawer = (
         <Box onClick={handleDrawerToggle} sx={{textAlign: 'center', width: '40vh'}}>
@@ -25,19 +32,10 @@ const Header = () => {
             <Divider />
             <ul className='mobile-menu'>
                 <li>
-                    <Link to={'/'}>Home</Link>
+                    <Link to={'/worker/messages'}>Messages</Link>
                 </li>
                 <li>
-                    <Link to={'/about'}>About</Link>
-                </li>
-                <li>
-                    <Link to={'/menu'}>Menu</Link>
-                </li>
-                <li>
-                    <Link to={'/reservations'}>Reserve A Table</Link>
-                </li>
-                <li>
-                    <Link to={'/contact'}>Contact</Link>
+                    <Link to={'/login'} onClick={handleClick}>Logout</Link>
                 </li>
             </ul>
         </Box>
@@ -70,19 +68,10 @@ const Header = () => {
                         <Box sx={{display: {xs:'none', sm: 'block'}}}>
                         <ul className='navigation-menu'>
                             <li>
-                                <Link to={'/'}>Home</Link>
+                                <Link to={'/worker/messages'}>Messages</Link>
                             </li>
                             <li>
-                                <Link to={'/about'}>About</Link>
-                            </li>
-                            <li>
-                                <Link to={'/menu'}>Menu</Link>
-                            </li>
-                            <li>
-                                <Link to={'/reservations'}>Reserve A Table</Link>
-                            </li>
-                            <li>
-                                <Link to={'/contact'}>Contact</Link>
+                                <Link to={'/login'} onClick={handleClick}>Logout</Link>
                             </li>
                         </ul>
                         </Box>
@@ -104,4 +93,4 @@ const Header = () => {
   )
 }
 
-export default Header;
+export default WorkerHeader;

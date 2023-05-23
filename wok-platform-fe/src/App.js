@@ -1,19 +1,18 @@
 import './App.css';
-import Home from './pages/Home';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import Menu from './pages/Menu';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import ReserveTable from './pages/ReserveTable';
-import Login from './pages/Admin/Login';
-import Categories from './pages/Admin/Categories';
-import Items from './pages/Admin/Items';
-import ItemEdit from './pages/Admin/ItemEdit';
-import DailyMenu from './pages/Admin/DailyMenu';
-import Reservations from './pages/Admin/Reservations';
-import Contacts from './pages/Admin/Contacts';
-import Messages from './pages/Messages';
-import MessagesFromClient from './pages/Admin/MessagesFromClient';
+import Home from './pages/Home/Home';
+import About from './pages/About/About';
+import Contact from './pages/Contact/Contact';
+import ReserveTable from './pages/Reservations/ReserveTable';
+import Menu from './pages/Menu/Menu';
+import Login from './pages/Admin/Login/Login';
+import Categories from './pages/Admin/Categories/Categories';
+import Items from './pages/Admin/Items/Items';
+import DailyMenu from './pages/Menu/DailyMenu';
+import Reservations from './pages/Admin/Reservations/Reservations';
+import Contacts from './pages/Admin/Contacts/Contacts';
+import Messages from './pages/Messages/Messages';
+import MessagesFromClient from './pages/Admin/Messages/MessagesFromClient';
 
 function App() {
 
@@ -29,7 +28,6 @@ function App() {
         <Route exact path='/login' element={<Login />} />
         <Route exact path='/admin/categories' element={<Categories />} />
         <Route exact path='/admin/categories/:categoryId/items' element={<Items />} />
-        <Route exact path='/admin/categories/:categoryId/items/:itemId' element={<ItemEdit />} />
         <Route exact path='/admin/dailymenu' element={<DailyMenu />} />
         <Route exact path='/admin/reservations' element={<Reservations />} />
         <Route exact path='/admin/contacts' element={<Contacts />} />
