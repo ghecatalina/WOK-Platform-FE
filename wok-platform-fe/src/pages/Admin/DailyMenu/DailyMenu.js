@@ -168,7 +168,14 @@ const DailyMenu = () => {
                             onChange={handleChange}/>
                         </Grid>
                         <Grid item xs={12}>
-                            <Button variant='contained' sx={{background: 'black'}}
+                            <Button variant='contained' fullWidth
+                            sx={{
+                                "&":{
+                                  background: 'black',
+                                },
+                                "&:hover":{
+                                    background: 'grey',
+                                }}}
                             onClick={handleSaveDailyMenu}>Save</Button>
                         </Grid>
                         </>

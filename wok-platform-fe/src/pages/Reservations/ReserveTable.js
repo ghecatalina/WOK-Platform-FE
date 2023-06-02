@@ -55,8 +55,7 @@ const ReserveTable = () => {
 
   return (
     <Layout>
-        <h1>ReserveTable</h1>
-        <Box>
+        <Box sx={{paddingTop: '4vh'}}>
           <Box>
             <form>
               <Grid container
@@ -64,7 +63,7 @@ const ReserveTable = () => {
                 // display: 'flex',
                 // justifyContent: 'flex-start',
                 // alignItems: 'center',
-                height: '100vh',
+                minHeight: '100vh',
                 // mx: 'auto',
                 // my: 'auto'
             }}>
@@ -103,9 +102,17 @@ const ReserveTable = () => {
                     }}
                     value={partySize}/>
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid item xs={12}
+                  sx={{
+                    "& button":{
+                      background: 'black'
+                    },
+                    "& button:hover":{
+                        background: 'grey',
+                        transform: 'translate(5px)',
+                        transition: 'all 400ms'
+                    }}}>
                     <Button variant='contained' 
-                    sx={{background: 'black'}}
                     onClick={fetchAvailableTables}>See available tables</Button>
                   </Grid>
                 </Grid>

@@ -7,36 +7,42 @@ import Layout from '../../components/Layout/Layout';
 const Messages = () => {
     const { tableId } = useParams();
     const initialState = {
-        type: '',
         tableNo: Number(tableId),
-        pay: null,
-        tip: null
+        tip: 0
     };
     const [isGetCheck, setIsGetCheck] = useState(false);
 
     const [formData, setFormData] = useState(initialState);
+    const [pay, setPay] = useState('Card');
 
     useEffect(() => {
         setConnection();
       }, []);
 
     const callWaiter = () =>{
-        setFormData({...formData, type: 'CallWaiter'});
-        sendClientMessage(formData);
-        // setFormData(initialState);
-        console.log(formData)
+        const message = {
+            type: 'CallWaiter',
+            tableNo: parseInt(tableId),
+        }
+        sendClientMessage(message);
+        console.log(message)
     }
 
     const getCheck = () => {
-        setFormData({...formData, type: 'GetCheck'});
         if (!isGetCheck){
             setIsGetCheck(true);
         }
         else{
-            sendClientMessage(formData);
-            //console.log(formData);
+            const message = {
+                type: 'GetCheck',
+                tableNo: parseInt(tableId),
+                pay: pay,
+                tip: parseInt(formData.tip)
+            };
+            sendClientMessage(message);
+            setPay('Card');
+            setIsGetCheck(false);
         }
-        setFormData(initialState);
     };
 
   return (
@@ -76,8 +82,8 @@ const Messages = () => {
                         <>
                             <Grid item xs={12}>
                                 <RadioGroup name='pay'
-                                value={'Card'}
-                                onChange={(e) => setFormData({...formData, pay: e.target.value})}>
+                                defaultValue={'Card'}
+                                onChange={(e) => setPay(e.target.value)}>
                                     <FormControlLabel control={<Radio />} label='Card' value='Card'/>
                                     <FormControlLabel control={<Radio />} label='Cash' value='Cash'/>
                                 </RadioGroup>

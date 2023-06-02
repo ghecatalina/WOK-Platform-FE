@@ -1,16 +1,12 @@
 import { Button, Grid, TextField } from '@mui/material';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { createCategory } from '../../../actions/categories';
+import { createCategory, updateCategorybyId } from '../../../actions/categories';
 
-const AddCategoryForm = ({openPopup, setOpenPopup}) => {
+const AddCategoryForm = ({openPopup, setOpenPopup, isEdit, category}) => {
     const dispatch = useDispatch();
 
-    const initialState = {
-        name: ''
-    }
-
-    const [formData, setFormData] = useState(initialState);
+    const [formData, setFormData] = useState(category);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,8 +14,14 @@ const AddCategoryForm = ({openPopup, setOpenPopup}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData);
-        dispatch(createCategory(formData));
+        const categoryForAction = {
+            name: formData.name
+        };
+        if (isEdit){
+            dispatch(updateCategorybyId(formData.id, categoryForAction));
+        }else{
+            dispatch(createCategory(categoryForAction));
+        }
         setOpenPopup(false);
     }
 

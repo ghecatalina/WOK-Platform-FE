@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Paper, TextField, Typography } from '@mui/material';
+import { Box, Button, Grid, IconButton, InputAdornment, Paper, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -6,6 +6,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { login } from '../../../api/index';
 import Layout from '../../../components/Layout/Layout';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const initialState = {email: '', password: ''};
 
@@ -19,6 +21,7 @@ const Login = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState(initialState);
     const [err, setErr] = useState("");
+    const [showPassword, setShowPassowrd] = useState(false);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -37,6 +40,9 @@ const Login = () => {
             localStorage.setItem('tk', response?.data.tk);
             localStorage.setItem('id', response?.data.id);
             localStorage.setItem('role', response?.data.role);
+            do {
+                continue;
+            }while(localStorage.getItem('tk') === null)
             response.data.role === 'Admin'
             ? navigate('/admin/categories')
             : navigate('/worker/messages')
@@ -69,12 +75,34 @@ const Login = () => {
                         <Typography color='red' variant="body2">{errors.email?.message}</Typography>
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField {...register("password", {required: "This field is required", minLength: {value: 8, message: "Min length is 8"}})} type="password" label="Password" variant="standard" fullWidth style={{paddingTop: '10px', paddingBottom: '10px'}}/>
+                        <TextField 
+                        {...register("password", {required: "This field is required", minLength: {value: 8, message: "Min length is 8"}})} 
+                        label="Password" variant="standard" fullWidth style={{paddingTop: '10px', paddingBottom: '10px'}}
+                        type={showPassword ? 'text' : 'password'}
+                        InputProps={{
+                        endAdornment:
+                        <InputAdornment position="end">
+                            <IconButton
+                            onClick={() => setShowPassowrd(!showPassword)}
+                            >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                        </InputAdornment>
+                        }}/>
                         <Typography color='red' variant="body2">{errors.password?.message}</Typography>
                         <Typography color='red' variant="body2">{err}</Typography>
                     </Grid>
-                    <Grid item xs={12}>
-                        <Button variant="contained" style={{backgroundColor: "black"}} type="submit">Login</Button>
+                    <Grid item xs={12}
+                    sx={{
+                        "& button":{
+                          background: 'black'
+                        },
+                        "& button:hover":{
+                            background: 'grey',
+                            transform: 'translate(5px)',
+                            transition: 'all 400ms'
+                        }}}>
+                        <Button variant="contained"type="submit" fullWidth>Login</Button>
                     </Grid>
                 </form>
                 </Grid>

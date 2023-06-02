@@ -1,12 +1,13 @@
 import { AppBar, Box, Divider, Drawer, IconButton, Toolbar, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import BrunchDiningIcon from '@mui/icons-material/BrunchDining';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import '../../style/HeaderStyle.css';
 
 const AdminHeader = () => {
     const [mobileOpen, setMobileOpen] = useState(false);
+    const location = useLocation();
     //handle menu click
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -80,19 +81,34 @@ const AdminHeader = () => {
                         <Box sx={{display: {xs:'none', sm: 'block'}}}>
                         <ul className='navigation-menu'>
                             <li>
-                                <Link to={'/admin/categories'}>Categories</Link>
+                                <Link to={'/admin/categories'}
+                                style={location.pathname === '/admin/categories' 
+                                ? {fontWeight: 'bold', textDecoration: 'none', color: 'white'} 
+                                : {textDecoration: 'none'}}>Categories</Link>
                             </li>
                             <li>
-                                <Link to={'/admin/dailymenu'}>Daily Menu</Link>
+                                <Link to={'/admin/dailymenu'}
+                                style={location.pathname === '/admin/dailymenu' 
+                                ? {fontWeight: 'bold', textDecoration: 'none', color: 'white'} 
+                                : {textDecoration: 'none'}}>Daily Menu</Link>
                             </li>
                             <li>
-                                <Link to={'/admin/reservations'}>Reservations</Link>
+                                <Link to={'/admin/reservations'}
+                                style={location.pathname === '/admin/reservations' 
+                                ? {fontWeight: 'bold', textDecoration: 'none', color: 'white'} 
+                                : {textDecoration: 'none'}}>Reservations</Link>
                             </li>
                             <li>
-                                <Link to={'/admin/contacts'}>Contacts</Link>
+                                <Link to={'/admin/contacts'}
+                                style={location.pathname === '/admin/contacts' 
+                                ? {fontWeight: 'bold', textDecoration: 'none', color: 'white'} 
+                                : {textDecoration: 'none'}}>Contacts</Link>
                             </li>
                             <li>
-                                <Link to={'/admin/messages'}>Messages</Link>
+                                <Link to={'/admin/messages'}
+                                style={location.pathname === '/admin/messages' 
+                                ? {fontWeight: 'bold', textDecoration: 'none', color: 'white'} 
+                                : {textDecoration: 'none'}}>Messages</Link>
                             </li>
                             <li>
                                 <Link to={'/login'} onClick={handleClick}>Logout</Link>

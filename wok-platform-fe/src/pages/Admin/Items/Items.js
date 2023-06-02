@@ -1,4 +1,4 @@
-import { Box, Button, Divider } from '@mui/material';
+import { Box, Button, Divider, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -7,6 +7,7 @@ import AdminLayout from '../../../components/AdminLayout/AdminLayout';
 import AddEditItemForm from './AddEditItemForm';
 import ItemsGrid from './ItemsGrid';
 import ItemPopup from './ItemPopup';
+import { getCategoryById } from '../../../api';
 
 const initialState ={
     name: '',
@@ -24,9 +25,18 @@ const Items = () => {
     const [isEdit, setIsEdit] = useState(false);
     const [itemForAction, setItemForAction] = useState(formData);
     const [openPopup, setOpenPopup] = useState(false);
+    const [category, setCategory] = useState(null);
 
     useEffect(() => {
-        dispatch(getItems(categoryId))
+        dispatch(getItems(categoryId));
+
+        getCategoryById(categoryId)
+        .then(response => {
+          setCategory(response.data);
+        })
+        .catch(err => {
+          console.log(err.message);
+        })
       }, [categoryId]);
 
       const handleAddItem = () => {
@@ -38,11 +48,23 @@ const Items = () => {
   return (
     <AdminLayout>
         <Box>
+          {category &&
         <Box sx={{margin: '20px', minHeight: '100vh', justifyContent: 'center', justifyItems: 'center'}}>
+          <Box display="flex" flexDirection="row">
+          <Typography variant='h4' sx={{marginRight: '1vh'}}>{category.name}</Typography>
             <Button 
-            variant="contained" style={{backgroundColor: "black", margin: '10px'}}
+            sx={{
+              "&":{
+                background: 'black',
+                margin: '0.6vh'
+              },
+              "&:hover":{
+                  background: 'grey',
+              }}}
+            variant="contained"
             onClick={handleAddItem}
             >Add Item</Button>
+            </Box>
             <Divider sx={{margin: '20px'}}/>
             <ItemsGrid 
             isEdit={isEdit} 
@@ -52,6 +74,7 @@ const Items = () => {
             itemForAction={itemForAction}
             setItemForAction={setItemForAction}/>
         </Box>
+        }
         </Box>
         <ItemPopup 
         title={isEdit ? 'Edit Item' : 'Add Item'} 
