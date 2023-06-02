@@ -131,12 +131,18 @@ const AddEditItemForm = ({
                 </Grid>
                     </Grid>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12}
+                sx={{
+                    "& button":{
+                      background: 'black'
+                    },
+                    "& button:hover":{
+                        background: 'grey',
+                    }}}>
                     <Button 
                     fullWidth 
                     type='submit'
-                    variant='contained' 
-                    sx={{background: 'black'}}>Save</Button>
+                    variant='contained'>Save</Button>
                 </Grid>
             </Grid>
         </form>

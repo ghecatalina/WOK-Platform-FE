@@ -3,7 +3,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import CategoryCard from './CategoryCard';
 
-const CategoriesGrid = () => {
+const CategoriesGrid = ({setIsEdit, isEdit, setOpenPopup, setCategory}) => {
     const categories = useSelector(state => state.categories);
 
     return (
@@ -14,7 +14,12 @@ const CategoriesGrid = () => {
                 return (
                     <Box>
                         <Grid item key={category.id} style={{margin: 20}}>
-                            <CategoryCard category={category} />
+                            <CategoryCard 
+                            category={category} 
+                            setIsEdit={setIsEdit} 
+                            isEdit={isEdit} 
+                            setOpenPopup={setOpenPopup}
+                            setCategory={setCategory}/>
                         </Grid>
                     </Box>
                 )

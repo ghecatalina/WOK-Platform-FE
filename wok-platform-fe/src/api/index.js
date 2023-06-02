@@ -21,6 +21,7 @@ export const getCategories = () => api.get('categories');
 export const addCategory = (formData) => apiWithToken.post('categories', formData);
 export const updateCategory = (id, formData) => apiWithToken.put(`categories/${id}`, formData);
 export const deleteCategory = (id) => apiWithToken.delete(`categories/${id}`);
+export const getCategoryById = (id) => api.get(`categories/${id}`);
 
 //items
 export const getItemsByCategory = (categoryId) => api.get(`categories/${categoryId}/items`);

@@ -1,12 +1,14 @@
 import { AppBar, Box, Divider, Drawer, IconButton, Toolbar, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import BrunchDiningIcon from '@mui/icons-material/BrunchDining';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import '../../style/HeaderStyle.css';
 import MenuIcon from '@mui/icons-material/Menu';
 
 const Header = () => {
     const [mobileOpen, setMobileOpen] = useState(false);
+    const location = useLocation();
+
     //handle menu click
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -70,19 +72,34 @@ const Header = () => {
                         <Box sx={{display: {xs:'none', sm: 'block'}}}>
                         <ul className='navigation-menu'>
                             <li>
-                                <Link to={'/'}>Home</Link>
+                                <Link to={'/'}
+                                style={location.pathname === '/' 
+                                ? {fontWeight: 'bold', textDecoration: 'none', color: 'white'} 
+                                : {textDecoration: 'none'}}>Home</Link>
                             </li>
                             <li>
-                                <Link to={'/about'}>About</Link>
+                                <Link to={'/about'}
+                                style={location.pathname === '/about' 
+                                ? {fontWeight: 'bold', textDecoration: 'none', color: 'white'} 
+                                : {textDecoration: 'none'}}>About</Link>
                             </li>
                             <li>
-                                <Link to={'/menu'}>Menu</Link>
+                                <Link to={'/menu'}
+                                style={location.pathname === '/menu' 
+                                ? {fontWeight: 'bold', textDecoration: 'none', color: 'white'} 
+                                : {textDecoration: 'none'}}>Menu</Link>
                             </li>
                             <li>
-                                <Link to={'/reservations'}>Reserve A Table</Link>
+                                <Link to={'/reservations'}
+                                style={location.pathname === '/reservations' 
+                                ? {fontWeight: 'bold', textDecoration: 'none', color: 'white'} 
+                                : {textDecoration: 'none'}}>Reserve A Table</Link>
                             </li>
                             <li>
-                                <Link to={'/contact'}>Contact</Link>
+                                <Link to={'/contact'}
+                                style={location.pathname === '/contact' 
+                                ? {fontWeight: 'bold', textDecoration: 'none', color: 'white'} 
+                                : {textDecoration: 'none'}}>Contact</Link>
                             </li>
                         </ul>
                         </Box>

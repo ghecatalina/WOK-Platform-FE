@@ -31,7 +31,7 @@ const Home = () => {
                 transform: 'translate(5px)',
                 transition: 'all 400ms'
             }}}>
-              <Button variant='contained' sx={{background: 'black', marginRight: '10px'}} onClick={goToReservations}>Book a table</Button>
+              <Button variant='contained' sx={{background: 'black', marginRight: '10px'}} onClick={goToReservations}>Reserve a table</Button>
               <Button variant='contained' sx={{background: 'black'}} onClick={goToMenuPage}>Menu</Button>
             </Box>
           </div>

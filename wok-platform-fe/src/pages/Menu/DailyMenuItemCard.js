@@ -23,9 +23,6 @@ const DailyMenuItemCard = ({item}) => {
         <Typography variant="body2" color="text.secondary">
             {item.quantity} g
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-            {item.price} RON
-        </Typography>
         </CardContent>
     </Card>
   )

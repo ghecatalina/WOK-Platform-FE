@@ -8,11 +8,11 @@ import Menu from './pages/Menu/Menu';
 import Login from './pages/Admin/Login/Login';
 import Categories from './pages/Admin/Categories/Categories';
 import Items from './pages/Admin/Items/Items';
-import DailyMenu from './pages/Menu/DailyMenu';
 import Reservations from './pages/Admin/Reservations/Reservations';
 import Contacts from './pages/Admin/Contacts/Contacts';
 import Messages from './pages/Messages/Messages';
 import MessagesFromClient from './pages/Admin/Messages/MessagesFromClient';
+import DailyMenu from './pages/Admin/DailyMenu/DailyMenu';
 
 function App() {
 

@@ -41,7 +41,7 @@ const Contact = () => {
       }}>
         <Grid item xs={12} md={6}
         sx={{
-          maxWidth: '30vh'
+          minWidth: '10vh'
         }}>
             <GoogleMaps />
         </Grid>
@@ -82,11 +82,19 @@ const Contact = () => {
                     onChange={handleChange}
                     inputProps={{ maxLength: 500 }}/>
                   </Grid>
-                  <Grid item xs={12}>
-                    <Button variant='text' type='submit' 
-                    sx={{
+                  <Grid item xs={12}
+                  sx={{
+                    "& button":{
                       color: 'black'
-                    }}>Send</Button>
+                    },
+                    "& button:hover":{
+                        background: 'none',
+                        transform: 'translate(5px)',
+                        transition: 'all 400ms',
+                        color: 'grey'
+                    }}}>
+                    <Button variant='text' type='submit' fullWidth
+                    >Send</Button>
                   </Grid>
                 </Grid>
               </form>

@@ -44,7 +44,7 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        background-color: rgb(81, 80, 80);
+        background-color: rgb(81, 80, 80, 0.8);
         color: white;
     }
     .home .header-container h1{

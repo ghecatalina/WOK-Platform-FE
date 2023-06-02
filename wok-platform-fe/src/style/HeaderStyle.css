@@ -10,8 +10,8 @@
 }
 
 .navigation-menu li a{
+    color: rgb(171, 165, 165);
     text-decoration: none;
-    color: aliceblue;
 }
 
 .mobile-menu{

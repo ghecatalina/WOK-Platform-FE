@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getContactsByDate } from '../../../actions/contacts';
-import { Box, CircularProgress, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
+import { Box, CircularProgress, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField } from '@mui/material';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import AdminLayout from '../../../components/AdminLayout/AdminLayout';
@@ -11,6 +11,20 @@ const Contacts = () => {
   const contacts = useSelector(state => state.contacts);
   const dispatch = useDispatch();
   const [date, setDate] = useState(new Date());
+
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, contacts.length - page * rowsPerPage);
 
   useEffect(() => {
     const formData = {
@@ -27,14 +41,15 @@ const Contacts = () => {
         alignItems: 'flex-start',
         justifyContent: 'center',
         height: '100vh',
-        padding: '5vh 4vh 0vh 5vh'
+        padding: '5vh 4vh 0vh 5vh',
+        marginBottom: '5vh'
       }}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
             label="Choose a date"
-            inputFormat="DD-MM-YYYY"
+            inputFormat="DD-MM-yyyy"
             value={date}
             onChange={(newValue) => {
               setDate(newValue);
@@ -55,12 +70,26 @@ const Contacts = () => {
                 <TableCell align="center">Date</TableCell>
               </TableRow>
             </TableHead>
-            {
-              !contacts ?
-              <CircularProgress /> :
-              <TableBody>
-                {
-                  contacts.map((contact) => (
+            {!contacts ? (
+            <TableBody>
+              <TableRow style={{ height: 53 * emptyRows }}>
+                <TableCell colSpan={5} align="center">
+                  <CircularProgress />
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          ) : (
+            <TableBody>
+              {contacts.length === 0 ? (
+                <TableRow style={{ height: 53 * emptyRows }}>
+                  <TableCell colSpan={5} align="center" sx={{color: 'grey', fontSize: 18}}>
+                    No data found
+                  </TableCell>
+                </TableRow>
+              ) : (
+                contacts
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((contact) => (
                     <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} > 
                       <TableCell component="th" scope="row">{contact.name}</TableCell>
                       <TableCell align="center">{contact.phoneNumber}</TableCell>
@@ -69,10 +98,19 @@ const Contacts = () => {
                       <TableCell align="center">{format(new Date(contact.date), 'dd-MM-yyyy')}</TableCell>
                     </TableRow>
                   ))
-                }
-              </TableBody>
-            }
-            </Table>
+              )}
+            </TableBody>
+          )}
+        </Table>            
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25, 50]}
+              component="div"
+              count={contacts.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
             </TableContainer>
           </Grid>
         </Grid>
