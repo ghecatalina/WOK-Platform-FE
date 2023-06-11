@@ -42,7 +42,7 @@ const Login = () => {
             localStorage.setItem('role', response?.data.role);
             do {
                 continue;
-            }while(localStorage.getItem('tk') === null)
+            }while(localStorage.getItem('tk') === null);
             response.data.role === 'Admin'
             ? navigate('/admin/categories')
             : navigate('/worker/messages')
