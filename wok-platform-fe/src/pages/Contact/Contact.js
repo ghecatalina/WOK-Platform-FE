@@ -35,7 +35,7 @@ const Contact = () => {
   return (
     <Layout>
       <Grid container
-      spacing={1}
+      spacing={6}
       sx={{
         padding: '10vh'
       }}>

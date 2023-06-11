@@ -1,9 +1,10 @@
-import React from 'react'
-import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
+import React, { useRef, useState } from 'react'
+import { GoogleMap, InfoWindow, Marker, useJsApiLoader } from '@react-google-maps/api';
+import { Button, Typography } from '@mui/material';
 
 const containerStyle = {
-  width: '400px',
-  height: '400px'
+  minHeight: '70vh',
+  minWidth: '40vh'
 };
 
 const center = {
@@ -34,9 +35,32 @@ function MyComponent() {
     setMap(null)
   }, [])
 
+  const markerRef = useRef(null);
+  const [isMarker, setIsMarker] = useState(false);
+
+  const handleOpenGoogleMaps = () => {
+    const latitude = center.lat;
+    const longitude = center.lng;
+    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+    window.open(mapsUrl, '_blank');
+  };
+
+  const RestaurantAddress = () => {
+    return (
+    <>
+      <h4>WOK Restaurant</h4>
+      <p>Bulevardul 1 Decembrie 1918</p>
+      <p>10</p>
+      <p>Orșova</p>
+      <p>225200</p>
+      <p>România</p>
+    </>)
+  }
+
   return isLoaded ? (
       <GoogleMap
         mapContainerStyle={containerStyle}
+        yesIWantToUseGoogleMapApiInternals
         center={center}
         zoom={15}
         onLoad={onLoad}
@@ -49,7 +73,17 @@ function MyComponent() {
         }}
       >
         { /* Child components, such as markers, info windows, etc. */ }
-        <Marker position={center} />
+        <Marker position={center} title='WOK Restaurant' onClick={() => setIsMarker(true)}>
+        {isMarker &&
+        <InfoWindow anchor={markerRef.current}
+        onCloseClick={() => setIsMarker(false)}>
+        <div>
+          <RestaurantAddress />
+          <Button onClick={handleOpenGoogleMaps}>Open in Google Maps</Button>
+        </div>
+        </InfoWindow>
+        }
+        </Marker>
       </GoogleMap>
   ) : <></>
 }
