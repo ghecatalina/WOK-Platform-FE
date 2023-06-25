@@ -14,3 +14,7 @@ export const GET_CONTACTS = 'GET_CONTACTS';
 export const GET_MESSAGES = 'GET_MESSAGES';
 export const DELETE_CATEGORY = 'DELETE_CATEGORY';
 export const CREATE_CATEGORY = 'CREATE_CATEGORY';
+export const START_LOADING = 'START_LOADING';
+export const END_LOADING = 'END_LOADING';
+
+export const AUTH = 'AUTH';

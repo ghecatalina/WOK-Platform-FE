@@ -1,4 +1,4 @@
-import { GET_ALL, CREATE, UPDATE, DELETE, GET_ITEM, UPDATE_ITEM } from '../constants/actionTypes';
+import { GET_ALL, CREATE, UPDATE, DELETE, GET_ITEM, UPDATE_ITEM, START_LOADING, END_LOADING } from '../constants/actionTypes';
 import { deleteItemByCategory, getItemByCategoryAndId } from '../api/index.js';
 import { updateItemByCategory } from '../api/index.js';
 import { getItemsByCategory } from '../api/index.js';
@@ -6,9 +6,11 @@ import { addItemByCategory } from '../api/index.js';
 
 export const getItems = (categoryId) => async (dispatch) => {
     try {
+        dispatch({ type: START_LOADING });
         const { data } = await getItemsByCategory(categoryId);
 
         dispatch({ type: GET_ALL, payload: data });
+        dispatch({ type: END_LOADING });
     } 
     catch(err) {
         console.log(err.message);

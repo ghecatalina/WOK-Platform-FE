@@ -5,6 +5,7 @@ import dailyMenu from "./dailyMenu";
 import reservations from "./reservations";
 import contacts from "./contacts";
 import messages from "./messages";
+import auth from "./auth";
 
 export default combineReducers({
     items: items,
@@ -12,5 +13,6 @@ export default combineReducers({
     dailyMenu: dailyMenu,
     reservations: reservations,
     contacts: contacts,
-    messages: messages
+    messages: messages,
+    auth: auth,
 });

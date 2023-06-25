@@ -14,9 +14,7 @@ const WorkerHeader = () => {
     }
  
     const handleClick = () => {
-        localStorage.removeItem('tk');
-        localStorage.removeItem('id');
-        localStorage.removeItem('role');
+        localStorage.clear();
     }
 
     //menu drawer

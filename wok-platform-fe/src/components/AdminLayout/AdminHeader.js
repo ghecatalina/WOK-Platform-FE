@@ -14,9 +14,7 @@ const AdminHeader = () => {
     }
  
     const handleClick = () => {
-        localStorage.removeItem('tk');
-        localStorage.removeItem('id');
-        localStorage.removeItem('role');
+        localStorage.clear();
     }
 
     //menu drawer
@@ -121,7 +119,7 @@ const AdminHeader = () => {
                 <Drawer variant='temporary' 
                 open={mobileOpen} 
                 onClose={handleDrawerToggle}
-                sx={{display: {xs:'block', sm: 'none'}}}>
+                sx={{display: {xs:'block', sm: 'none', md: 'block'}}}>
                     {drawer}
                 </Drawer>
             </Box>

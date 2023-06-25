@@ -9,7 +9,7 @@ import AdminLayout from '../../../components/AdminLayout/AdminLayout';
 const MessagesFromClient = () => {
     const [message, setMessage] = useState(null);
     const dispatch = useDispatch();
-    const recievedMessages = useSelector(state => state.messages);
+    // const recievedMessages = useSelector(state => state.messages);
     const role = localStorage.getItem('role');
 
     useEffect(() => {
@@ -28,17 +28,17 @@ const MessagesFromClient = () => {
 
       useEffect(() => {
         dispatch(getAllMessages());
-      }, [dispatch, message])
+      }, [dispatch])
 
   return (
     role === 'Worker'
     ?
     <WorkerLayout>
-        <MessageTable recievedMessages={recievedMessages}/>
+        <MessageTable message={message}/>
     </WorkerLayout>
     :
     <AdminLayout>
-      <MessageTable recievedMessages={recievedMessages}/>
+      <MessageTable message={message}/>
     </AdminLayout>
   )
 }

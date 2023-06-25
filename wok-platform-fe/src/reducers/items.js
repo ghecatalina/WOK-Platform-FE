@@ -1,18 +1,22 @@
-import { CREATE, DELETE, GET_ALL, GET_ITEM, UPDATE, UPDATE_ITEM } from "../constants/actionTypes";
+import { CREATE, DELETE, END_LOADING, GET_ALL, GET_ITEM, START_LOADING, UPDATE, UPDATE_ITEM } from "../constants/actionTypes";
 
-export default (items = [], action) => {
+export default ( state = { isLoading: true, items: []}, action ) => {
     switch(action.type){
+        case START_LOADING:
+            return { ...state, isLoading: true };
+        case END_LOADING:
+            return { ...state, isLoading: false };
         case GET_ALL:
-            return action.payload;
-        case GET_ITEM:
-            return action.payload.item;
+            return {...state, items: action.payload};
+        // case GET_ITEM:
+        //     return action.payload.item;
         case CREATE:
-            return [...items, action.payload];
+            return { ...state, items: [...state.items, action.payload] };
         case UPDATE_ITEM:
-            return action.payload;
+            return {...state, items: action.payload};
         case DELETE:
-            return items.filter((item) => item.id !== action.payload);
+            return { ...state, items: state.items.filter((item) => item.id !== action.payload) };
         default:
-            return items;
+            return state;
     }
 }

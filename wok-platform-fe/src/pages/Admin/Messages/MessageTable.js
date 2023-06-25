@@ -1,10 +1,18 @@
 import { CircularProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllMessages } from '../../../actions/messages';
 
-const MessageTable = ({recievedMessages}) => {
+const MessageTable = ({message}) => {
+  const recievedMessages = useSelector(state => state.messages);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllMessages());
+  }, [dispatch, message])
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
