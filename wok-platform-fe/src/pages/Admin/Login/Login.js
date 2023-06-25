@@ -8,6 +8,8 @@ import { login } from '../../../api/index';
 import Layout from '../../../components/Layout/Layout';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { useDispatch } from 'react-redux';
+import { signin } from '../../../actions/auth';
 
 const initialState = {email: '', password: ''};
 
@@ -22,6 +24,7 @@ const Login = () => {
     const [formData, setFormData] = useState(initialState);
     const [err, setErr] = useState("");
     const [showPassword, setShowPassowrd] = useState(false);
+    const dispatch = useDispatch();
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -35,22 +38,8 @@ const Login = () => {
             password: data.password,
         }
         //e.preventDefault();
-        login(userInfo)
-        .then(response => {
-            localStorage.setItem('tk', response?.data.tk);
-            localStorage.setItem('id', response?.data.id);
-            localStorage.setItem('role', response?.data.role);
-            do {
-                continue;
-            }while(localStorage.getItem('tk') === null);
-            response.data.role === 'Admin'
-            ? navigate('/admin/categories')
-            : navigate('/worker/messages')
-        })
-        .catch(error => {
-            console.log(error.response.data.Message);
-            setErr(error.response.data.Message);
-        })
+        
+        dispatch(signin(userInfo, navigate));
         reset();
     }
 

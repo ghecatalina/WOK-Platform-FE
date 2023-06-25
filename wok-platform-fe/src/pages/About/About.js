@@ -20,6 +20,7 @@ const About = () => {
           <Grid container spacing={3}>
             <Grid item xs={12} md={6}>
             <Carousel 
+            interval={1500}
             autoPlay={true}
             infiniteLoop={true}
             showThumbs={false}

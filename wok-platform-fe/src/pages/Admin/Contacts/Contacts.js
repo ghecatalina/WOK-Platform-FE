@@ -40,7 +40,7 @@ const Contacts = () => {
         display: 'flex',
         alignItems: 'flex-start',
         justifyContent: 'center',
-        height: '100vh',
+        minHeight: '100vh',
         padding: '5vh 4vh 0vh 5vh',
         marginBottom: '5vh'
       }}>

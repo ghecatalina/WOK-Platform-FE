@@ -42,6 +42,7 @@ const Messages = () => {
             sendClientMessage(message);
             setPay('Card');
             setIsGetCheck(false);
+            setFormData(initialState);
         }
     };
 

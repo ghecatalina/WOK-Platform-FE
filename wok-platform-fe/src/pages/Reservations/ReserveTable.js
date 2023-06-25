@@ -63,7 +63,7 @@ const ReserveTable = () => {
                 // display: 'flex',
                 // justifyContent: 'flex-start',
                 // alignItems: 'center',
-                minHeight: '100vh',
+                minHeight: '90vh',
                 // mx: 'auto',
                 // my: 'auto'
             }}>

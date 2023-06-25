@@ -9,7 +9,11 @@ const DailyMenu = () => {
 
   return (
       !dailyMenu  ? 
-      <CircularProgress /> :
+      <Box item xs={12} display="flex" justifyContent="center" alignItems="center" minHeight="80vh">
+        <Box minWidth={'90vw'} textAlign="center">
+          <CircularProgress />
+        </Box>
+      </Box> :
       <>
       <Grid container spacing={3} 
         justifyContent='space-around' 

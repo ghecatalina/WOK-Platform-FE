@@ -1,11 +1,11 @@
-import { Box, Button, Card, CardContent, CardMedia, Divider, Grid, Typography } from '@mui/material'
+import { Box, Button, Card, CardContent, CardMedia, CircularProgress, Divider, Grid, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getItems } from '../../actions/items';
 
 const CategoriesGrid = () => {
     const categories = useSelector(state => state.categories);
-    const items = useSelector(state => state.items);
+    const {items, isLoading} = useSelector(state => state.items);
     const dispatch = useDispatch();
     const [categoryId, setCategoryId] = useState(null);
 
@@ -46,7 +46,13 @@ const CategoriesGrid = () => {
                 </>
             )
         })}
-        <Grid container spacing={3} 
+        {isLoading ? 
+        <Box item xs={12} display="flex" justifyContent="center" alignItems="center" minHeight="71vh">
+        <Box minWidth={'90vw'} textAlign="center">
+          <CircularProgress />
+        </Box>
+      </Box> :
+        (<Grid container spacing={3} 
         justifyContent='space-around' 
         alignItems='center'
         sx={{
@@ -87,6 +93,7 @@ const CategoriesGrid = () => {
                 })
             }
                 </Grid>
+                )}
     </Grid>
   )
 }
