@@ -3,7 +3,7 @@ import React from 'react';
 import ItemCard from './ItemCard';
 import { useSelector } from 'react-redux';
 
-const ItemsGrid = ({isEdit, setIsEdit, openPopup, setOpenPopup, itemForAction, setItemForAction}) => {
+const ItemsGrid = ({isEdit, setIsEdit, openPopup, setOpenPopup, itemForAction, setItemForAction, setToDelete, setOpenAlert}) => {
     const {items, isLoading} = useSelector(state => state.items);
     console.log(items);
 
@@ -30,7 +30,9 @@ const ItemsGrid = ({isEdit, setIsEdit, openPopup, setOpenPopup, itemForAction, s
                         isEdit={isEdit} 
                         setIsEdit={setIsEdit}
                         itemForAction={itemForAction}
-                        setItemForAction={setItemForAction}/>
+                        setItemForAction={setItemForAction}
+                        setToDelete={setToDelete}
+                        setOpenAlert={setOpenAlert}/>
                     </Grid>
                 </Box>
             )

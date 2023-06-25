@@ -1,4 +1,4 @@
-import { Box, Button, Divider } from '@mui/material';
+import { Alert, AlertTitle, Box, Button, Divider } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from "yup";
@@ -9,6 +9,7 @@ import { getAllCategories } from '../../../actions/categories';
 import AdminLayout from '../../../components/AdminLayout/AdminLayout';
 import CategoryPopup from './CategoryPopup';
 import AddCategoryForm from './AddCategoryForm';
+import CategoryAlert from './CategoryAlert';
 
 const schema = yup.object().shape({
     email: yup.string().required(),
@@ -24,6 +25,8 @@ const Categories = () => {
     const dispatch = useDispatch();
     const [isEdit, setIsEdit] = useState(false);
     const [category, setCategory] = useState(null);
+    const [openAlert, setOpenAlert] = useState(false);
+    const [toDelete, setToDelete] = useState(null);
 
     useEffect(() => {
         dispatch(getAllCategories());
@@ -54,7 +57,9 @@ const Categories = () => {
         setIsEdit={setIsEdit}
         isEdit={isEdit}
         setOpenPopup={setOpenPopup}
-        setCategory={setCategory}/>
+        setCategory={setCategory}
+        setToDelete={setToDelete}
+        setOpenAlert={setOpenAlert}/>
         </Box>
         <CategoryPopup 
         title={isEdit ? 'Edit Category' : 'Add Category'} 
@@ -66,6 +71,10 @@ const Categories = () => {
           isEdit={isEdit}
           category={category}/>
         </CategoryPopup>
+        {
+          openAlert &&
+          <CategoryAlert category={toDelete} setOpenAlert={setOpenAlert} openAlert={openAlert}/>
+        }
     </AdminLayout>
   )
 }
