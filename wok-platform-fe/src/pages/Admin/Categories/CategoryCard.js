@@ -1,4 +1,4 @@
-import { Card, CardActions, CardContent, IconButton, Typography } from '@mui/material';
+import { Alert, AlertTitle, Button, Card, CardActions, CardContent, IconButton, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from 'react-router-dom';
@@ -6,16 +6,16 @@ import { useDispatch } from 'react-redux';
 import { deleteCategoryById } from '../../../actions/categories';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const CategoryCard = ({category, setIsEdit, isEdit, setOpenPopup, setCategory}) => {
+const CategoryCard = ({category, setIsEdit, isEdit, setOpenPopup, setCategory, setToDelete, setOpenAlert}) => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
     const goToItems = () => {
         navigate(`/admin/categories/${category.id}/items`);
     }
     
-    const deleteCategory = () => {
-        dispatch(deleteCategoryById(category.id));
+    const openAlert = () => {
+        setToDelete(category);
+        setOpenAlert(true);
     }
 
     const handleEdit = () => {
@@ -25,6 +25,7 @@ const CategoryCard = ({category, setIsEdit, isEdit, setOpenPopup, setCategory}) 
     }
 
   return (
+    <>
     <Card 
     variant='outlined' 
     xs={{minWidth: 200}} 
@@ -40,7 +41,7 @@ const CategoryCard = ({category, setIsEdit, isEdit, setOpenPopup, setCategory}) 
         </CardContent>
         <CardActions>
                 <>
-                <IconButton onClick={deleteCategory}>
+                <IconButton onClick={openAlert}>
                     <DeleteIcon sx={{color: 'whitesmoke'}} />
                 </IconButton>
                 <IconButton onClick={handleEdit}>
@@ -49,6 +50,7 @@ const CategoryCard = ({category, setIsEdit, isEdit, setOpenPopup, setCategory}) 
                 </>
         </CardActions>
     </Card>
+    </>
   )
 }
 

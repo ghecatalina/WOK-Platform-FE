@@ -8,6 +8,7 @@ import AddEditItemForm from './AddEditItemForm';
 import ItemsGrid from './ItemsGrid';
 import ItemPopup from './ItemPopup';
 import { getCategoryById } from '../../../api';
+import ItemAlert from './ItemAlert';
 
 const initialState ={
     name: '',
@@ -26,6 +27,8 @@ const Items = () => {
     const [itemForAction, setItemForAction] = useState(formData);
     const [openPopup, setOpenPopup] = useState(false);
     const [category, setCategory] = useState(null);
+    const [openAlert, setOpenAlert] = useState(false);
+    const [toDelete, setToDelete] = useState(null);
 
     useEffect(() => {
         dispatch(getItems(categoryId));
@@ -72,7 +75,9 @@ const Items = () => {
             openPopup={openPopup}
             setOpenPopup={setOpenPopup}
             itemForAction={itemForAction}
-            setItemForAction={setItemForAction}/>
+            setItemForAction={setItemForAction}
+            setToDelete={setToDelete}
+            setOpenAlert={setOpenAlert}/>
         </Box>
         }
         </Box>
@@ -86,6 +91,7 @@ const Items = () => {
           item={itemForAction}
           isEdit={isEdit}/>
         </ItemPopup>
+        <ItemAlert categoryId={categoryId} item={toDelete} openAlert={openAlert} setOpenAlert={setOpenAlert}/>
     </AdminLayout>
   )
 }

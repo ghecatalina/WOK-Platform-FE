@@ -13,12 +13,12 @@ const ItemCard = ({
   isEdit, 
   setIsEdit,
   itemForAction,
-  setItemForAction}) => {
-    const { categoryId } = useParams();
-    const dispatch = useDispatch();
-
+  setItemForAction,
+  setOpenAlert,
+  setToDelete}) => {
     const handleDelete = () => {
-        dispatch(deleteItem(categoryId, item.id));
+      setToDelete(item);
+      setOpenAlert(true);
     }
 
     const handleEdit = () => {

@@ -10,6 +10,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import ReservationPopup from '../../Reservations/ReservationPopup'
 import EditReservationForm from './EditReservationForm';
+import ReservationAlert from './ReservationAlert'
 
 const Reservations = () => {
   const reservations = useSelector(state => state.reservations);
@@ -17,6 +18,8 @@ const Reservations = () => {
   const [date, setDate] = useState(new Date());
   const [openPopup, setOpenPopup] = useState(false);
   const [reservationToEdit, setReservationToEdit] = useState(null);
+  const [openAlert, setOpenAlert] = useState(false);
+  const [toDelete, setToDelete] = useState(null);
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -39,11 +42,9 @@ const Reservations = () => {
     dispatch(getReservationsByDate(formData));
   },[dispatch, date])
 
-  const handleDelete = (id) => {
-    const formData = {
-      date: format(date, 'yyyy-MM-dd')
-    };
-    dispatch(deleteReservationById(Number(id), formData));
+  const handleDelete = (reservation) => {
+    setToDelete(reservation);
+    setOpenAlert(true);
   }
 
   const handleEdit = (reservation) => {
@@ -119,7 +120,7 @@ const Reservations = () => {
                         <IconButton onClick={() => handleEdit(reservation)}>
                           <EditIcon />
                         </IconButton>
-                        <IconButton onClick={() => handleDelete(reservation.id)}>
+                        <IconButton onClick={() => handleDelete(reservation)}>
                           <DeleteIcon sx={{color: 'black'}}/>
                         </IconButton>
                       </TableCell>
@@ -148,6 +149,7 @@ const Reservations = () => {
           openPopup={openPopup}
           setOpenPopup={setOpenPopup}/>
         </ReservationPopup>
+      <ReservationAlert openAlert={openAlert} setOpenAlert={setOpenAlert} toDelete={toDelete} date={date}/>
     </AdminLayout>
   )
 }
